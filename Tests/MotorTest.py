@@ -24,5 +24,8 @@ motorD.on_for_rotations(SpeedPercent(75), 5)
 # Run both motors ay 75% max speed for 5 rotations
 motorDA.on_for_rotations(75, 75, 5)
 
-# Turn test
+# Turn right
 motorDA.on_for_rotations(75, -75, 5)
+
+# Turn Left
+motorDA.on_for_rotations(-75, 75, 5)
