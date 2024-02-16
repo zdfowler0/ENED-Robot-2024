@@ -25,7 +25,7 @@ motorD.on_for_rotations(SpeedPercent(75), 5)
 motorDA.on_for_rotations(75, 75, 5)
 
 # Turn right
-motorDA.on_for_rotations(75, -75, 5)
+motorDA.on_for_rotations(25, -25, 5)
 
 # Turn Left
-motorDA.on_for_rotations(-75, 75, 5)
+motorDA.on_for_rotations(-25, 25, 5)
