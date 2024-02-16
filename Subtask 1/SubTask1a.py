@@ -18,7 +18,6 @@ num_laps = 0
 distance_cm = 0
 
 # variables we want to use
-target_angle = 0
 speed_percent = 30
 distance_mm = distance_cm * 10
 
@@ -37,8 +36,3 @@ for i in range(num_laps):
         move(moveDA, speed_percent, rotations)
     else:
         move(moveDA, -speed_percent, rotations)
-
-'''
-# Follow the target_angle for 4500ms
-moveDA.follow_gyro_angle(kp=11.3, ki=0.05, kd=3.2,speed=SpeedPercent(speed_percent),target_angle=target_angle,follow_for = follow_for_ms,ms=4500)
-'''
