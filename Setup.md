@@ -3,7 +3,7 @@
 Go to [VS Code](https://code.visualstudio.com/Download) and install the latest version.
 
 # 2. Install Extensions
-Go into VS Code. On the left side bar, there is a button with 4 square (Extensions tab) *(Shortcut: Ctrl + Shift + X)*.
+Go into VS Code. On the left side bar, there is a button with 4 squares (Extensions tab) *(Shortcut: Ctrl + Shift + X)*.
 Go into this tab and find the following extensions, and download them:
 - Python (Extension ID (copy into extensions search bar if having trouble): ms-python.python)
 - ev3dev-browser (ev3dev.ev3dev-browser)
