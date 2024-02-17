@@ -8,7 +8,8 @@ Go into this tab and find the following extensions, and download them:
 - Python (Extension ID (copy into extensions search bar if having trouble): ms-python.python)
 - ev3dev-browser (ev3dev.ev3dev-browser)
 - LEGO® MINDSTORMS® EV3 MicroPython (lego-education.ev3-micropython)
-*Note Pylance (ms-python.vscode-pylance) may require a reload after installations*
+
+*Note: Pylance (ms-python.vscode-pylance) may require a reload after installations*
 
 # 3. Connecting the EV3 Brick to WiFi and (Bluetooth)
 The easiest way I have found how to do this is to connect via Bluetooth. The [ev3dev website](https://www.ev3dev.org/docs/tutorials/connecting-to-the-internet-via-bluetooth/) has good documentation on this.
@@ -27,6 +28,7 @@ This took me a little while to get working but eventually the EV3 does connect. 
 - Once the proper information is entered the EV3 will connect.
 ## Upload files
 - Once the EV3 is connected, press the download button near the name of the device; this will copy the code onto the robot.
+
 *Note: this must be done ***every*** time you would like to update a file*** 
 
 Hopefully this documentation helps with sending files to the EV3. Good luck!
