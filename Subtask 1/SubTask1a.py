@@ -7,12 +7,6 @@ import math
 # Make controls
 moveDA = MoveTank(OUTPUT_D, OUTPUT_A)
 
-# Initialize gyro sensor
-moveDA.gyro = GyroSensor()
-
-# Calibrate the gyro to initialize the current angle as 0
-moveDA.gyro.calibrate()
-
 # variables determined by subtask
 num_laps = 0
 distance_cm = 0
@@ -21,8 +15,8 @@ distance_cm = 0
 speed_percent = 30
 distance_mm = distance_cm * 10
 
-# wheel specifications
-wheel_diameter = 68.8
+# wheel specifications (68.8mm is big, 56mm is medium)
+wheel_diameter = 56
 wheel_circumference = 2*math.pi()*(wheel_diameter / 2)
 rotations = distance_mm / wheel_circumference
 
