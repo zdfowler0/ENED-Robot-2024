@@ -29,6 +29,6 @@ This took me a little while to get working but eventually the EV3 does connect. 
 ## Upload files
 - Once the EV3 is connected, press the download button near the name of the device; this will copy the code onto the robot.
 
-*Note: this must be done ***every*** time you would like to update a file*** 
+*Note: this must be done ***every*** time you would like to update a file*
 
 Hopefully this documentation helps with sending files to the EV3. Good luck!
