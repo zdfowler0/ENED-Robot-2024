@@ -10,14 +10,17 @@ from ev3dev2.wheel import EV3EducationSetTire
 from ev3dev2.sensor import INPUT_1
 from ev3dev2.sensor.lego import GyroSensor
 from ev3dev2.sound import Sound
+from wheelbase import WHEEL_DISTANCE
 from time import sleep
 
 # Size of a stud in MM
 STUD_MM = 8
 MM_IN = 25.4
+# wheel distance
+wheel_distance = WHEEL_DISTANCE
 
 # Initilize robot system
-mdiff = MoveDifferential(left_motor_port=OUTPUT_A, right_motor_port=OUTPUT_D, wheel_class=EV3EducationSetTire, wheel_distance_mm=21.4 * STUD_MM)
+mdiff = MoveDifferential(left_motor_port=OUTPUT_A, right_motor_port=OUTPUT_D, wheel_class=EV3EducationSetTire, wheel_distance_mm=wheel_distance)
 mdiff.gyro = GyroSensor(INPUT_1)
 mdiff.odometry_start()
 spkr = Sound()
@@ -35,7 +38,7 @@ spkr.play_song((
 # This function allows the robot to move a specified distance using the gyro for error correction
 def go(distance_mm, angle, speed=40, accuracy=2):
     # turn to correct direction
-    mdiff.turn_to_angle(SpeedRPM(speed/2), angle, brake=True, block=True, error_margin=accuracy, use_gyro=True)
+    mdiff.turn_to_angle(SpeedRPM(speed/2), angle, brake=True, block=True, error_margin=0.5, use_gyro=True)
     
     itterations = 5
 
@@ -49,8 +52,10 @@ This is the code that runs the subtask
 '''
 # go to the row (12 in)
 go(12*MM_IN, 270)
+
 # go to the end of the facility (96 in)
 go(96*MM_IN, 0)
+
 # go down into Home A (12 in)
 go(12*MM_IN, 90)
 

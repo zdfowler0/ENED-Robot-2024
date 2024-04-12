@@ -10,13 +10,16 @@ from ev3dev2.wheel import EV3EducationSetTire
 from ev3dev2.sensor import INPUT_1, INPUT_2, INPUT_3
 from ev3dev2.sensor.lego import GyroSensor, UltrasonicSensor
 from ev3dev2.sound import Sound
+from wheelbase import WHEEL_DISTANCE
 
 # Size of a stud in MM
 STUD_MM = 8
 MM_IN = 25.4
+# wheel distance
+wheel_distance = WHEEL_DISTANCE
 
 # Initilize robot system
-mdiff = MoveDifferential(left_motor_port=OUTPUT_A, right_motor_port=OUTPUT_D, wheel_class=EV3EducationSetTire, wheel_distance_mm=20.8 * STUD_MM)
+mdiff = MoveDifferential(left_motor_port=OUTPUT_A, right_motor_port=OUTPUT_D, wheel_class=EV3EducationSetTire, wheel_distance_mm=wheel_distance)
 mdiff.gyro = GyroSensor(INPUT_1)
 motor = MediumMotor(OUTPUT_B)
 spkr = Sound()
@@ -52,14 +55,16 @@ def go(distance_mm, angle, speed=40, accuracy=0.5):
 This is the code that runs the subtask
 '''
 # move to the box
-'''
-while(ultrasonic.distance_centimeters_continuous > 5):
-    go(5, 90, speed=20)
-    spkr.play_song((
-    ('C4', 'e'),
-    ('C4', 'e')
-))
-'''
+while(ultrasonic.distance_centimeters > 5 and ultrasonic.distance_centimeters != 255):
+    print(ultrasonic.distance_centimeters)
+    mdiff.on_for_distance(SpeedRPM(15), 30)
+
+while(ultrasonic.distance_centimeters > 3 and ultrasonic.distance_centimeters != 255):
+    print(ultrasonic.distance_centimeters)
+    mdiff.on_for_distance(SpeedRPM(15), 5)
+
+print(ultrasonic.distance_centimeters)
+mdiff.on_for_distance(SpeedRPM(10), 20)
 
 spkr.play_song((
     ('E4', 'e'),
@@ -68,12 +73,12 @@ spkr.play_song((
 # pick up the box
 motor.on_for_rotations(SpeedRPM(-15), 1.25)
 # back up
-go(6*MM_IN, 90, speed=-20)
+go(4*MM_IN, 90, speed=-20)
 # go to end of aisle
-mdiff.turn_to_angle(SpeedRPM(10), 180, error_margin=2, use_gyro=True)
-mdiff.on_for_rotations(SpeedRPM(15), SpeedRPM(15), 4)
+mdiff.turn_left(SpeedRPM(10), 87, use_gyro=False)
+mdiff.on_for_distance(SpeedRPM(20), 20 * MM_IN)
 # place down
-motor.on_for_rotations(SpeedRPM(15), 1.25)
+motor.on_for_rotations(SpeedRPM(20), 1.25)
 
 # end odometry thread
 mdiff.odometry_stop()

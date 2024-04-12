@@ -10,14 +10,17 @@ from ev3dev2.wheel import EV3EducationSetTire
 from ev3dev2.sensor import INPUT_1
 from ev3dev2.sensor.lego import GyroSensor
 from ev3dev2.sound import Sound
+from wheelbase import WHEEL_DISTANCE
 from math import pi
 
 # Size of a stud in MM
 STUD_MM = 8
 # MM to IN conversion
 MM_IN = 25.4
+# wheel distance
+wheel_distance = WHEEL_DISTANCE
 
-mdiff = MoveDifferential(left_motor_port=OUTPUT_A, right_motor_port=OUTPUT_D, wheel_class=EV3EducationSetTire, wheel_distance_mm=21.4 * STUD_MM)
+mdiff = MoveDifferential(left_motor_port=OUTPUT_A, right_motor_port=OUTPUT_D, wheel_class=EV3EducationSetTire, wheel_distance_mm= wheel_distance)
 mdiff.gyro = GyroSensor(INPUT_1)
 spkr = Sound()
 spkr.play_song((

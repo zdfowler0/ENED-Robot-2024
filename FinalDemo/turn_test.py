@@ -14,15 +14,18 @@ from ev3dev2.sensor.lego import GyroSensor, UltrasonicSensor, ColorSensor
 from ev3dev2.display import Display
 from ev3dev2.sound import Sound
 from ev3dev2.fonts import load
+from wheelbase import WHEEL_DISTANCE
 from math import atan, degrees
 from time import sleep
 
 # Size of a stud in MM
 STUD_MM = 8
 MM_IN = 25.4
+# wheel distance
+wheel_distance = WHEEL_DISTANCE
 
 # Initilize robot system
-mdiff = MoveDifferential(left_motor_port=OUTPUT_A, right_motor_port=OUTPUT_D, wheel_class=EV3EducationSetTire, wheel_distance_mm=20.8 * STUD_MM)
+mdiff = MoveDifferential(left_motor_port=OUTPUT_A, right_motor_port=OUTPUT_D, wheel_class=EV3EducationSetTire, wheel_distance_mm=wheel_distance)
 mdiff.gyro = GyroSensor(INPUT_1)
 spkr = Sound()
 spkr.play_song((
@@ -74,52 +77,70 @@ curr_barcode = []
 
 
 
+curr_barcode = []
+
 # let user know they may take readings
 display.text_pixels("Ready!",font=my_font)
 display.update()
 
+initial_angle = 20
+sub_angle = initial_angle * 0.5
+
 # initial
-mdiff.turn_right(SpeedRPM(5), 17)
-octave = color.color
-if(octave == 1):
-    octave == 3
-elif(octave == 6):
-    octave == 4
+if(color.color == 1):
+    curr_barcode.append(1)
+    octave = 3
+else:
+    curr_barcode.append(0)
+    octave = 4
 note_str = 'C' + str(octave)
 spkr.play_song((
     (note_str, 'e'),
 ))
 
 # step
-mdiff.turn_left(SpeedRPM(5), 10)
-octave = color.color
-if(octave == 1):
-    octave == 3
-elif(octave == 6):
-    octave == 4
+mdiff.turn_left(SpeedRPM(5), sub_angle)
+if(color.color == 1):
+    curr_barcode.append(1)
+    octave = 3
+else:
+    curr_barcode.append(0)
+    octave = 4
 note_str = 'C' + str(octave)
 spkr.play_song((
     (note_str, 'e'),
 ))
 
-mdiff.turn_left(SpeedRPM(5), 10)
-octave = color.color
-if(octave == 1):
-    octave == 3
-elif(octave == 6):
-    octave == 4
+mdiff.turn_left(SpeedRPM(5), sub_angle)
+if(color.color == 1):
+    curr_barcode.append(1)
+    octave = 3
+else:
+    curr_barcode.append(0)
+    octave = 4
 note_str = 'C' + str(octave)
 spkr.play_song((
     (note_str, 'e'),
 ))
 
-mdiff.turn_left(SpeedRPM(5), 10)
-octave = color.color
-if(octave == 1):
-    octave == 3
-elif(octave == 6):
-    octave == 4
+mdiff.turn_left(SpeedRPM(5), sub_angle)
+if(color.color == 1):
+    curr_barcode.append(1)
+    octave = 3
+else:
+    curr_barcode.append(0)
+    octave = 4
 note_str = 'C' + str(octave)
 spkr.play_song((
     (note_str, 'e'),
 ))
+
+# turn to back out
+mdiff.turn_to_angle(SpeedRPM(10), 90, error_margin=1, use_gyro=True)
+
+new_barcode = [0, 0, 0, 0]
+for i in range(3, 0, -1):
+    new_barcode[3-i] = curr_barcode[i]
+
+
+print(new_barcode)
